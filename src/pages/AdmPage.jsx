@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-function VistaAdministrador (){
+function AdmPage (){
     return (
         <div>
             <h1>hola</h1>
@@ -8,4 +8,4 @@ function VistaAdministrador (){
     )
 }
 
-export default VistaAdministrador;
+export default AdmPage;
