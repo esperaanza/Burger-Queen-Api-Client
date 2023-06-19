@@ -3,7 +3,7 @@
     grid-row: 1 / 2;
     display: flex;
     align-items: center;
-    background-color: black;
+    background-color: #BB10F6;
     color: white;
     border-radius: 25px 25px 0px 0px;
 }
@@ -53,7 +53,7 @@
 
 .buttons button {
     padding: 0 10px;
-    background-color: #F5A929;
+    background-color: #BB10F6;
     color: white;
     border-radius: 25px;
     height: 30px;
@@ -113,7 +113,7 @@
     border-radius: 25px;
     margin-bottom: 10px;
     width: 80px;
-    background-color: #F5A929;
+    background-color: #BB10F6;
     color: white;
     border-radius: 25px;
     height: 30px;
@@ -136,7 +136,7 @@
     border-radius: 25px;
     margin-bottom: 10px;
     width: 120px;
-    background-color: #F5A929;
+    background-color: #BB10F6;
     color: white;
     border-radius: 25px;
     height: 30px;

@@ -38,15 +38,23 @@
 }
 
 .formLogin input::placeholder{
-    font-family: var(--font-urbanist);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     color: #A09E9E;
 }
 
 .message{
-    color: var(--orange);
+    color: orange;
 }
-
+.buttons button {
+    padding: 0 10px;
+    background-color: #BB10F6;
+    color: white;
+    border-radius: 25px;
+    height: 30px;
+    margin: 20px;
+    border: none;
+}
 
 
 

@@ -60,8 +60,11 @@ export default function PageHome() {
 
     return (
         <>
+         <div className="nav">  
+                
+                </div>
             <div className="containerLogin">
-                <img src={BQ} alt="logo food express" className="logoLogin" />
+                <img src={BQ} alt="logo " className="logoLogin" />
                 <form className="formLogin" onSubmit={validateLogin}>
                     <h1>Bienvenido</h1>
                     <input
@@ -83,10 +86,12 @@ export default function PageHome() {
                         }}
                         value={password}
                     />
-                    <button>Iniciar Sesión</button>
+                    <div className="buttons">
+                    <button>Iniciar Sesión</button> 
+                    </div>
                     {errors.password && <p1 className="error">{errors.password}</p1>}
-
                     {errors.resError && <p1 className="error">{errors.resError}</p1>}
+                
                 </form>
             </div>
         </>
