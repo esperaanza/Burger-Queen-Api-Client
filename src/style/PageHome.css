@@ -8,7 +8,7 @@
 
 .containerLogin p{
     font-size: 1.2rem;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .logoLogin{
@@ -38,13 +38,13 @@
 }
 
 .formLogin input::placeholder{
-    font-family: Italianno;
+    font-family: var(--font-urbanist);
     text-align: center;
     color: #A09E9E;
 }
 
 .message{
-    color: rgb(14, 195, 105);
+    color: var(--orange);
 }
 
 
