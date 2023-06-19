@@ -1,15 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
+import BQ from "../assets/BQ.png";
 import { useNavigate } from "react-router-dom";
-import '../style/PageHome.css';
+import "../style/PageHome.css";
 
 export default function PageHome() {
-    const [userEmail, setUserEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [userEmail, setUserEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const validateLogin = (e) => {
         e.preventDefault();
 
         const validationErrors = {};
@@ -25,12 +26,12 @@ export default function PageHome() {
             return;
         }
 
-        fetch('http://localhost:8080/login', {
-            method: 'POST',
+        fetch("http://localhost:8080/login", {
+            method: "POST",
             body: JSON.stringify({ email: userEmail, password: password }),
             headers: {
-                'Content-Type': 'application/json'
-            }
+                "Content-Type": "application/json",
+            },
         })
             .then((res) => {
                 if (res.ok) {
@@ -40,48 +41,54 @@ export default function PageHome() {
                 }
             })
             .then((resJson) => {
-                localStorage.setItem('token', resJson.accessToken);
+                localStorage.setItem("token", resJson.accessToken);
                 const { role } = resJson.user;
-                if (role === 'waitress') {
+                if (role === "admin") {
+                    navigate("/admin");
+                }
+                if (role === "waitress") {
                     navigate("/waiter");
-                } else if (role === 'chef') {
+                } else if (role === "chef") {
                     navigate("/cook");
                 }
             })
-            .catch(err => {
-                console.log('Error:', err);
+            .catch((err) => {
+                console.log("Error:", err);
                 setErrors({ resError: "Correo y/o contraseña incorrecta" });
             });
-    }
+    };
 
     return (
         <>
-            <section className="indexImg"></section>
-            <form className="loginForm" onSubmit={handleSubmit}>
-                <h1>Bienvenido</h1>
-                <input
-                    placeholder='Escribe tu correo'
-                    type='email'
-                    onChange={e => {
-                        setUserEmail(e.target.value);
-                        setErrors(prevErrors => ({ ...prevErrors, email: '' }));
-                    }}
-                    value={userEmail}
-                />
-                {errors.email && <p1 className="error">{errors.email}</p1>}
-                <input
-                    placeholder='Escribe tu contraseña'
-                    type='password'
-                    onChange={e => {
-                        setPassword(e.target.value);
-                        setErrors(prevErrors => ({ ...prevErrors, password: '' }));
-                    }}
-                    value={password}
-                />
-                {errors.password && <p1 className="error">{errors.password}</p1>}
-                <button>Iniciar Sesión</button>
-                {errors.resError && <p1 className="error">{errors.resError}</p1>}
-            </form>
+            <div className="containerLogin">
+                <img src={BQ} alt="logo food express" className="logoLogin" />
+                <form className="formLogin" onSubmit={validateLogin}>
+                    <h1>Bienvenido</h1>
+                    <input
+                        placeholder="Escribe tu correo"
+                        type="email"
+                        onChange={(e) => {
+                            setUserEmail(e.target.value);
+                            setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+                        }}
+                        value={userEmail}
+                    />
+                    {errors.email && <p1 className="error">{errors.email}</p1>}
+                    <input
+                        placeholder="Escribe tu contraseña"
+                        type="password"
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+                        }}
+                        value={password}
+                    />
+                    <button>Iniciar Sesión</button>
+                    {errors.password && <p1 className="error">{errors.password}</p1>}
+
+                    {errors.resError && <p1 className="error">{errors.resError}</p1>}
+                </form>
+            </div>
         </>
     );
 }

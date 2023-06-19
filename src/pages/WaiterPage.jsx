@@ -1,58 +1,73 @@
-import '../style/WaiterPage.css'
+import { useState } from 'react';
+import '../style/Waitress.css';
+import Products from '../components/products';
+import { useEffect } from 'react';
 
-export default function WaiterPage() {
+export default function Waitress() {
+    const [products, setProducts] = useState([]);
+    const [costumerName, setCostumerName] = useState('');
+    /* const [order, setOrder] = useState([]); */
+
+    const token = localStorage.getItem('token');
+    useEffect(() => {
+        fetch('http://localhost:8080/products/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(resp => resp.json())
+            .then(data => setProducts(data))
+            .catch(error => console.log(error))
+    }, [token]);
+
+    const handleClickBF = () => {
+        setProducts(products.filter((item) => item.type === "Desayuno"))
+    }
+
+    const handleClickLandD = () => {
+        setProducts(products.filter((item) => item.type === "Almuerzo"))
+    }
+
+    /* const addProduct = () => {
+  
+    } */
+    /*  const handleNewOrder = () => {
+   
+     } */
+
     return (
-        <div className='containerMesero'>
-            <nav>
-                <ul>
-                    <li>Cafe</li>
-                    <li>Jugos</li>
-                    <li>Pasteleria</li>
-                    <li>Otros</li>
-                </ul>
-                <button>Pedido</button>
-            </nav>
-
-            <div className='containerProducts'>
-                <div className='product'>
-                    <h2>Americano</h2>
-                </div>
-                {/* <div className='product'>
-                    <h2>Americano</h2>
-                </div>
-                <div className='product'>
-                    <h2>Americano</h2>
-                </div>
-                <div className='product'>
-                    <h2>Americano</h2>
-                </div>
-                <div className='product'>
-                    <h2>Americano</h2>
-                </div>
-                <div className='product'>
-                    <h2>Americano</h2>
-                </div> */}
+        <>
+            <div className="nav">
+                <h1>Burger Queen</h1>
+                <a>Menú</a>
+                <a>Órdenes</a>
+            
             </div>
-
-            <div className='containerOrder'>
-                <div className='containerButton'>
-                    <button>Nombre:</button>
-                    <button>Mesa:</button>
-                </div>
-                <div className='containerItems'>
-                    <div className='item'>
-                        <h3>Americano</h3>
-                        <div className='containerCantidad'>
-                            <button>+</button>
-                            <h3>2</h3>
-                            <button>-</button>
-                        </div>
-                        <h3 className='precio'>$</h3>
-                    </div>
-
-                </div>
+            <div className="costumer">
+                <label>Nombre Cliente: </label>
+                <input
+                    placeholder="Ingrese nombre cliente"
+                    type="text"
+                    onChange={e => setCostumerName(e.target.value)}
+                />
             </div>
+            <div className="buttons">
+                <button onClick={handleClickBF}>Desayuno</button>
+                <button onClick={handleClickLandD}>Almuerzo y Cena</button>
+            </div>
+            <div className='products'>
+                <h2>Productos</h2>
+                <Products products={products} />
+            </div>
+            <div className="orders">
+                <h2>Pedido</h2>
+                <h4>Cliente: {costumerName}</h4>
 
-        </div>
+                <button>Enviar a cocina</button>
+            </div>
+        </>
+
     )
 }
