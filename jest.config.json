@@ -1,0 +1,14 @@
+{
+    "moduleNameMapper": {
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "transform": {
+        "^.+\\.jsx?$": "babel-jest",
+        "bail": 1,
+    "verbose": true
+    },
+    
+        "moduleFileExtensions": ["js", "jsx"]
+       
+      }
+    

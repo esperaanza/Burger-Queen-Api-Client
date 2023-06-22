@@ -26,6 +26,8 @@ export default function PageHome() {
             return;
         }
 
+
+        
         fetch("http://localhost:8080/login", {
             method: "POST",
             body: JSON.stringify({ email: userEmail, password: password }),
